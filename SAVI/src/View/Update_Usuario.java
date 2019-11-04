@@ -8,6 +8,8 @@ import Model.DAO.*;
 import Model.VO.*;
 import java.awt.event.*;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
 Classe usada para actualizar dados do usúario
@@ -56,8 +58,8 @@ private DAO_Usuario user_DAO;
         window.setLocationRelativeTo(null);
     
     
-        user= usuario;
-        user.setNomeUsuario("Joao");
+        user= usuario;// The user must receive the current logged user
+        user_DAO= new DAO_Usuario();
         String textField_PlaceHolder[]= {user.getNomeUsuario(),""+user.getSenha()+"", user.getEmail(),""+user.getCelular()+"", user.getBairro(), user.getRua(), ""+user.getQuarteirao()+""};
         String labelText[]= {"BI: "," "+user.getBi()+"","Nome completo: ",""+user.getNome()+"  "+user.getApelido()+" ","Nome do usuario: ","Senha: ","E-mail: ","Celular: ","Bairro: ", "Rua: ", "Quarteirao: ", "  "};
     
@@ -119,11 +121,11 @@ private DAO_Usuario user_DAO;
                         break;
                           
                     case 2: 
-                        errors = (v.validarString(errors,textField[i].getText(), 16, 25,i));
+                        errors = (v.validarString(errors,textField[i].getText(), 10, 25,i));
                         break;    
                            
                     case 3: 
-                        errors = (v.validarString(errors,textField[i].getText(), 821111111, 879999999,i));
+                        errors = (v.validarInt(errors,textField[i].getText(), 821111111, 879999999,i));
                         break; 
                          
                     case 4: 
@@ -135,20 +137,31 @@ private DAO_Usuario user_DAO;
                         break;
                         
                     case 6: 
-                        errors = (v.validarString(errors,textField[i].getText(), 1, 99,i));
+                        errors = (v.validarInt(errors,textField[i].getText(), 1, 99,i));
                         break;    
                       
                 }
-                  
-                
-                      
+                   
             }
             
-            if(errors.isEmpty())
-               JOptionPane.showMessageDialog(null, "Actualizacao efectuada!","SUCESSO!",JOptionPane.INFORMATION_MESSAGE); 
-            
-                
-                
+            if(errors.isEmpty()){
+                user.setNomeUsuario(textField[0].getText());
+                user.setSenha(Integer.parseInt(textField[1].getText()));
+                user.setEmail(textField[2].getText());
+                user.setCelular(Integer.parseInt(textField[3].getText()));
+                user.setBairro(textField[4].getText());
+                user.setRua(textField[5].getText());
+                user.setQuarteirao(Integer.parseInt(textField[3].getText()));
+                try {
+                    user_DAO.alterar(user);
+                } catch (Exception ex) {
+                    Logger.getLogger(Update_Usuario.class.getName()).log(Level.SEVERE, null, ex);     
+                }
+                JOptionPane.showMessageDialog(null, "Actualizacao efectuada!","SUCESSO!",JOptionPane.INFORMATION_MESSAGE);
+                window.setVisible(false);
+                Update_Usuario w= new Update_Usuario(user);
+            }
+    
             else{
                 String error= "Corrija os seguintes erros: \n";
                 for(short  i=0; i<errors.size(); i++)
@@ -163,8 +176,7 @@ private DAO_Usuario user_DAO;
         
     }
         
-    
-    
+     
     public static void main(String args[]) throws Exception{
         Usuario u= new Usuario();
         Update_Usuario up= new Update_Usuario(u);
