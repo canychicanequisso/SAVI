@@ -17,8 +17,8 @@ public class DAO_Usuario implements IDAO<Usuario> {
     public void inserir(Usuario usuario) throws Exception {
         
         Conexao c = new Conexao();
-        String sql = "call InserirUsuario(?,?,?,?,?,?,?,?,?,?)";
-        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        String query = "call InserirUsuario(?,?,?,?,?,?,?,?,?,?)";
+        PreparedStatement ps = c.getConexao().prepareStatement(query);
         ps.setString(1, usuario.getBi());
         ps.setString(2, usuario.getNome());
         ps.setString(3, usuario.getApelido());
@@ -29,7 +29,6 @@ public class DAO_Usuario implements IDAO<Usuario> {
         ps.setString(8, usuario.getNomeUsuario());
         ps.setInt(9, usuario.getSenha());
         ps.setString(10, usuario.getEmail());
-        
         ps.executeUpdate();
         ps.close();
         c.confirmar();
@@ -38,14 +37,20 @@ public class DAO_Usuario implements IDAO<Usuario> {
     @Override
     public void alterar(Usuario usuario) throws Exception {
         Conexao c = new Conexao();
-        String sql = "UPDATE TBPRODUTO SET NOME=?, PRECOCOMPRA=?, PRECOVENDA=? WHERE CODIGO=?";
-        PreparedStatement ps = c.getConexao().prepareStatement(sql);
-       // ps.setString(1, produto.getNome());
-       // ps.setDouble(2, produto.getPrecoCompra());
-        //ps.setDouble(3, produto.getPrecoVenda());
-        //ps.setInt(4, produto.getCodigo());
-        ps.execute();
+        String query = "call actualizarUsuario(?,?,?,?,?,?,?,?)";
+        PreparedStatement ps = c.getConexao().prepareStatement(query);
+        ps.setInt(1, usuario.getNrConta());
+        ps.setString(2, usuario.getNomeUsuario());
+        ps.setInt(3, usuario.getSenha());
+        ps.setString(4,usuario.getEmail());
+        ps.setInt(5, usuario.getCelular());
+        ps.setString(6, usuario.getBairro());
+        ps.setString(7,usuario.getRua());
+        ps.setInt(8,usuario.getQuarteirao());
+        ps.executeUpdate();
+        ps.close();
         c.confirmar();
+        
     }
 
     @Override

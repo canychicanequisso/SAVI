@@ -10,11 +10,16 @@ import Model.VO.*;
 
 /*
 Classe usada para actualizar dados do usúario
-Legenda:
+
+
+--------------------Legenda---------------------
+
+- Botões
 button[0] => Actualizar
 button[1] => Limpar
 button[2] => Voltar
 ___________________________
+- Label's
 label[0] =>  BI (label)
 label[1] =>  BI (Conteúdo)
 label[2] => Nome Completo (label)
@@ -28,18 +33,14 @@ label[9] => Rua
 label[10] => Quarteirao
 label[10] => Label vazio usado para melhorar o layout
 
-
-
 */
-
-
 
 
 public class Update_User2 {
     
 private JFrame window;
 private JPanel panel[]= new JPanel[4];
-private JLabel label[]= new JLabel[11];
+private JLabel label[]= new JLabel[12];
 private JTextField textField[]= new JTextField[7];
 private JButton button[]= new JButton[3];
 private String buttonText[]= {"ACTUALIZAR","LIMPAR", "VOLTAR"};
@@ -67,24 +68,20 @@ public Update_User2(){
         if(i<3)
             button[i]= new JButton(buttonText[i]);  
     }
-        
-   
+     
     panel[0].setLayout(new GridBagLayout());
     panel[1].setLayout(new GridLayout(11,2));
     panel[2].setLayout(new GridBagLayout());
     
-    
-    for( i=0;i<label.length;i++){//adding labels on panel1
+    for( i=0;i<label.length;i++){ //ciclo usado para adicionar label's e campos de texto ao painel_1
         panel[1].add(label[i]); 
         if(i>3 && i<11)
             panel[1].add(textField[i-4]);            
     }
      
-    for( i=0; i<button.length;i++)//adding butttons on panel2
+    for( i=0; i<button.length;i++) //ciclo usado para adicionar botões ao painel_2
         panel[2].add(button[i]);
    
-    
-    
    
    panel[3].add(panel[2]);
    panel[1].add(panel[3]);

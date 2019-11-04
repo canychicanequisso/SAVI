@@ -120,8 +120,7 @@ public class CriarConta_View extends JFrame implements ActionListener{
             } catch (Exception ex) {
                 Logger.getLogger(CriarConta_View.class.getName()).log(Level.SEVERE, null, ex);
             }
-            setVisible(false);
-            setBackground(Color.BLACK);
+            
         }
     }
 }
