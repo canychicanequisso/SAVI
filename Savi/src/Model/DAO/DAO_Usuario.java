@@ -56,10 +56,12 @@ public class DAO_Usuario implements IDAO<Usuario> {
     @Override
     public void excluir(Usuario usuario) throws Exception {
         Conexao c = new Conexao();
-        String sql = "DELETE FROM TBPRODUTO WHERE CODIGO=?";
-        PreparedStatement ps = c.getConexao().prepareStatement(sql);
-       // ps.setInt(1, produto.getCodigo());
-        ps.execute();
+        String query = "CALL removerUsuario(?,?)";
+        PreparedStatement ps = c.getConexao().prepareStatement(query);
+        ps.setString(1, usuario.getBi());
+        ps.setInt(2, usuario.getNrConta());
+        ps.executeUpdate();
+        ps.close();
         c.confirmar();
     }
 

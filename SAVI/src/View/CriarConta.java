@@ -23,45 +23,40 @@ button[1] => Limpar
 button[2] => Voltar
 ___________________________
 - Label's
-label[0] =>  BI (label)
-label[1] =>  BI (Conteúdo)
-label[2] => Nome Completo (label)
-label[3] => Nome Completo (Conteúdo)
-label[4] => Username
-label[5] => Password
-label[6] => E-mail
-label[7] => Celular
-label[8] => Bairro
-label[9] => Rua
-label[10] => Quarteirao
-label[11] => Label vazio usado para melhorar o layout
+label[0] =>  BI 
+label[1] => Nome Completo
+label[2] => Username
+label[3] => Password
+label[4] => E-mail
+label[5] => Celular
+label[6] => Bairro
+label[7] => Rua
+label[8] => Quarteirao
+label[9] => Label vazio usado para melhorar o layout
+
 */
 
 
-
-public class Update_Usuario implements ActionListener{
+public class CriarConta implements ActionListener{
     
 private JFrame window;
 private JPanel panel[]= new JPanel[4];
-private JLabel label[]= new JLabel[12];
-private JTextField textField[]= new JTextField[7];
+private JLabel label[]= new JLabel[10];
+private JTextField textField[]= new JTextField[9];
 private JButton button[]= new JButton[4];
 private String buttonText[]= {"ACTUALIZAR","ELIMINAR CONTA","LIMPAR","VOLTAR"};
 private Usuario user;
 private DAO_Usuario user_DAO;
 
 
-    public Update_Usuario(Usuario usuario){
+    public CriarConta(){
     
         window= new JFrame("ACTUALIZACAO DE DADOS");
         window.setSize(900,400);
         window.setLocationRelativeTo(null);
-    
-    
-        user= usuario;// The user must receive the current logged user
         user_DAO= new DAO_Usuario();
         String textField_PlaceHolder[]= {user.getNomeUsuario(),""+user.getSenha()+"", user.getEmail(),""+user.getCelular()+"", user.getBairro(), user.getRua(), ""+user.getQuarteirao()+""};
-        String labelText[]= {"BI: "," "+user.getBi()+"","Nome completo: ",""+user.getNome()+"  "+user.getApelido()+" ","Nome do usuario: ","Senha: ","E-mail: ","Celular: ","Bairro: ", "Rua: ", "Quarteirao: ", "  "};
+        String labelText[]= {"BI: ","Nome completo: ","Nome do usuario: ","Senha: ","E-mail: ","Celular: ","Bairro: ", "Rua: ", "Quarteirao: ", "  "};
     
         short i;
         for(i=0;i<label.length;i++){
